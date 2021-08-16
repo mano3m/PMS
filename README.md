@@ -92,6 +92,25 @@ void loop()
 
     Serial1.print("PM 10.0 (ug/m3): ");
     Serial1.println(data.PM_AE_UG_10_0);
+
+    // Particle count only availably for PMS5003/PMS7003
+    Serial1.print("Particle count >0.3 (#/cm3): ");
+    Serial1.println(data.PC_0_3);
+
+    Serial1.print("Particle count >0.5 (#/cm3): ");
+    Serial1.println(data.PC_0_5);
+
+    Serial1.print("Particle count >1.0 (#/cm3): ");
+    Serial1.println(data.PC_1_0);
+
+    Serial1.print("Particle count >2.5 (#/cm3): ");
+    Serial1.println(data.PC_2_5);
+
+    Serial1.print("Particle count >5.0 (#/cm3): ");
+    Serial1.println(data.PC_5_0);
+
+    Serial1.print("Particle count >10.0 (#/cm3): ");
+    Serial1.println(data.PC_10_0);
   }
   else
   {

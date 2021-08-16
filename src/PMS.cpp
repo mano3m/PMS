@@ -133,6 +133,17 @@ void PMS::loop()
           _data->PM_AE_UG_1_0 = makeWord(_payload[6], _payload[7]);
           _data->PM_AE_UG_2_5 = makeWord(_payload[8], _payload[9]);
           _data->PM_AE_UG_10_0 = makeWord(_payload[10], _payload[11]);
+
+          if (_frameLen == 2 * 13 + 2)
+          {
+            // Particle count per size bucket.
+            _data->PC_0_3 = makeWord(_payload[12], _payload[13]);
+		        _data->PC_0_5 = makeWord(_payload[14], _payload[15]);
+		        _data->PC_1_0 = makeWord(_payload[16], _payload[17]);
+		        _data->PC_2_5 = makeWord(_payload[18], _payload[19]);
+		        _data->PC_5_0 = makeWord(_payload[20], _payload[21]);
+		        _data->PC_10_0 = makeWord(_payload[22], _payload[23]);
+          }
         }
 
         _index = 0;
@@ -143,7 +154,7 @@ void PMS::loop()
         _calculatedChecksum += ch;
         uint8_t payloadIndex = _index - 4;
 
-        // Payload is common to all sensors (first 2x6 bytes).
+        // Payload's first 2x6 bytes are common to all sensors, next bytes only for newer versions.
         if (payloadIndex < sizeof(_payload))
         {
           _payload[payloadIndex] = ch;
